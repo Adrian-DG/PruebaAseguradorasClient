@@ -1,0 +1,7 @@
+{
+  "name": "prueba_aseguradoras_client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
