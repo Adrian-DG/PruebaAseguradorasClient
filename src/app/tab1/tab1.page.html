@@ -1,17 +1,59 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
+	<app-main-toolbar></app-main-toolbar>
+
+	<ion-toolbar>
+		<ion-title>LiTO</ion-title>
+		<ion-buttons slot="end">
+			<ion-menu-button auto-hide="false"></ion-menu-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<ion-header>
+		<ion-toolbar class="ion-padding">
+			<ion-title size="large" style="text-align: center"
+				>¿Que quieres hacer hoy?</ion-title
+			>
+		</ion-toolbar>
+		<ion-toolbar class="ion-padding" color="primary">
+			<ion-title size="large" style="text-align: center"
+				>Cotizar una poliza</ion-title
+			>
+		</ion-toolbar>
+	</ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+	<section style="width: 100%; height: auto; margin-top: 20%">
+		<h4 style="text-align: center">Aseguradoras más populares</h4>
+		<div class="insurance-list">
+			<ion-card
+				*ngFor="let insurance in _insuranceService.mostPopular$ | async"
+			>
+				<ion-card-header>
+					<ion-card-title>{{ insurance }}</ion-card-title>
+				</ion-card-header>
+			</ion-card>
+		</div>
+		<ion-text>
+			<a>Ver más aseguradoras</a>
+			<ion-icon name="chevron-forward-outline"></ion-icon>
+		</ion-text>
+	</section>
+
+	<section class="banner"></section>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col
+				><ion-button color="primary"
+					>Iniciar sesión aqui</ion-button
+				></ion-col
+			>
+			<ion-col
+				><ion-button color="primary"
+					>Registrate aquí</ion-button
+				></ion-col
+			>
+		</ion-row>
+	</ion-grid>
 </ion-content>
