@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { InsuranceService } from '../shared/services/insurance.service';
 
 @NgModule({
 	imports: [
@@ -21,5 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 		FormsModule,
 	],
 	declarations: [Tab2Page],
+	providers: [InsuranceService],
 })
 export class Tab2PageModule {}

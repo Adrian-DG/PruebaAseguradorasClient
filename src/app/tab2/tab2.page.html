@@ -6,11 +6,80 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
+	<ion-header>
 		<ion-toolbar>
-			<ion-title size="large">Tab 2</ion-title>
+			<ion-searchbar></ion-searchbar>
 		</ion-toolbar>
 	</ion-header>
 
-	<app-explore-container name="Tab 2 page"></app-explore-container>
+	<div class="section ion-padding">
+		<h4>Listado Aseguradoras</h4>
+		<ion-item-divider></ion-item-divider>
+	</div>
+	<ion-grid>
+		<ion-row>
+			<ion-col *ngFor="let item of _insuranceService.insurance$ | async">
+				{{ item.name }}
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-fab
+		slot="fixed"
+		vertical="bottom"
+		horizontal="end"
+		style="margin-bottom: 1em; margin-right: 1em"
+	>
+		<ion-fab-button id="open-modal" color="primary">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+
+	<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+		<ng-template>
+			<ion-header>
+				<ion-toolbar>
+					<ion-title style="text-align: center"
+						>Crear Aseguradora</ion-title
+					>
+				</ion-toolbar>
+				<ion-toolbar>
+					<ion-buttons slot="start">
+						<ion-button>Cancelar</ion-button>
+					</ion-buttons>
+					<ion-buttons slot="end">
+						<ion-button>Aceptar</ion-button>
+					</ion-buttons>
+				</ion-toolbar>
+			</ion-header>
+			<ion-content>
+				<ion-card>
+					<ion-card-header>
+						<ion-card-title>Formulario Aseguradora</ion-card-title>
+						<ion-card-subtitle
+							>Registro de una nueva
+							aseguradora</ion-card-subtitle
+						>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item>
+							<ion-input
+								label="Nombre"
+								labelPlacement="floating"
+							></ion-input>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+				<div class="image ion-padding">
+					<ion-img
+						[src]="imagePath"
+						style="width: 100%; height: auto"
+					></ion-img>
+					<ion-button color="primary" expand="block" fill="outline">
+						Subir Imagem
+						<ion-icon name="image-outline" slot="end"></ion-icon>
+					</ion-button>
+				</div>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
 </ion-content>
