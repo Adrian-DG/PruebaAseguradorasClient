@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-	<app-main-toolbar></app-main-toolbar>
+<ion-header [translucent]="false">
+	<app-main-toolbar [title]="'Inicio'"></app-main-toolbar>
 
 	<ion-toolbar>
 		<ion-title>LiTO</ion-title>
@@ -11,46 +11,58 @@
 
 <ion-content [fullscreen]="true">
 	<ion-header>
-		<ion-toolbar class="ion-padding">
+		<ion-toolbar>
 			<ion-title size="large" style="text-align: center"
 				>¿Que quieres hacer hoy?</ion-title
 			>
 		</ion-toolbar>
-		<ion-toolbar class="ion-padding" color="primary">
+		<ion-toolbar color="primary">
 			<ion-title size="large" style="text-align: center"
 				>Cotizar una poliza</ion-title
 			>
 		</ion-toolbar>
 	</ion-header>
 
-	<section style="width: 100%; height: auto; margin-top: 20%">
+	<section style="height: 50%; width: 100%">
 		<h4 style="text-align: center">Aseguradoras más populares</h4>
-		<div class="insurance-list">
+
+		<div style="width: 100%" class="popular-list ion-padding">
 			<ion-card
+				class="popular-list-item"
 				*ngFor="let insurance of _insuranceService.mostPopular$ | async"
 			>
-				<ion-card-header>
-					<ion-card-title>{{ insurance.name }}</ion-card-title>
-				</ion-card-header>
+				<ion-img
+					[src]="insurance.logo"
+					[alt]="insurance.name"
+				></ion-img>
 			</ion-card>
 		</div>
-		<ion-text>
-			<a>Ver más aseguradoras</a>
-			<ion-icon name="chevron-forward-outline"></ion-icon>
-		</ion-text>
+
+		<p style="width: 100%; text-align: center">
+			Ver más aseguradoras
+			<span><ion-icon name="chevron-forward-outline"></ion-icon></span>
+		</p>
 	</section>
 
-	<section class="banner"></section>
+	<ion-card class="banner">
+		<section>
+			<p>
+				Renueva tu póliza hoy <br />hoy con hasta un<br /><span
+					>20% OFF</span
+				>
+			</p>
+		</section>
+	</ion-card>
 
 	<ion-grid>
 		<ion-row>
-			<ion-col
-				><ion-button color="primary"
+			<ion-col size="6"
+				><ion-button color="primary" shape="round" style="width: 100%"
 					>Iniciar sesión aqui</ion-button
 				></ion-col
 			>
-			<ion-col
-				><ion-button color="primary"
+			<ion-col size="6"
+				><ion-button color="primary" shape="round" style="width: 100%"
 					>Registrate aquí</ion-button
 				></ion-col
 			>

@@ -1,8 +1,13 @@
-ion-grid {
-	height: 50%;
-}
-
-.image {
+.list {
 	width: 100%;
-	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 0.5em;
+	flex-wrap: wrap;
+	.list-item {
+		width: 45%;
+		height: 20%;
+	}
 }

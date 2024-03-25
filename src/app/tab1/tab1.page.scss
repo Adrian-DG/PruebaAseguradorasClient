@@ -1,0 +1,45 @@
+.popular-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 1em;
+	.popular-list-item {
+		width: 25%;
+		max-height: 4em;
+	}
+}
+
+.banner {
+	height: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	background-image: url('../../assets/nissan-x-trail-2022-1-1662456751.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	section {
+		height: 100%;
+		width: 100%;
+		text-align: right;
+		background: rgb(242, 244, 245);
+		background: linear-gradient(
+			90deg,
+			rgb(28, 28, 43) 35%,
+			rgb(24, 24, 46) 50%
+		);
+		opacity: 0.7;
+		padding: 0.5em;
+		p {
+			color: rgb(210, 166, 112);
+			font-size: 1.5rem;
+			span {
+				font-weight: bold;
+				font-size: 2.5rem !important;
+			}
+		}
+	}
+}

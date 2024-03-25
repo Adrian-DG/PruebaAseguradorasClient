@@ -1,28 +1,28 @@
 <ion-header [translucent]="true">
-	<app-main-toolbar></app-main-toolbar>
-	<ion-toolbar>
-		<ion-title> Tab 2 </ion-title>
-	</ion-toolbar>
+	<app-main-toolbar [title]="'Listado Aseguradoras'"></app-main-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 	<ion-header>
 		<ion-toolbar>
-			<ion-searchbar></ion-searchbar>
+			<ion-searchbar
+				[showClearButton]="true"
+				[debounce]="1000"
+				(ionInput)="onSearch($event)"
+				[autocapitalize]="false"
+			></ion-searchbar>
 		</ion-toolbar>
 	</ion-header>
 
-	<div class="section ion-padding">
-		<h4>Listado Aseguradoras</h4>
-		<ion-item-divider></ion-item-divider>
+	<div class="list ion-padding">
+		<div
+			*ngFor="let item of _insuranceService.insurance$ | async"
+			class="list-item"
+		>
+			<app-insurace-card [item]="item"></app-insurace-card>
+		</div>
 	</div>
-	<ion-grid>
-		<ion-row>
-			<ion-col *ngFor="let item of _insuranceService.insurance$ | async">
-				{{ item.name }}
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+
 	<ion-fab
 		slot="fixed"
 		vertical="bottom"
@@ -36,18 +36,18 @@
 
 	<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
 		<ng-template>
-			<ion-header>
-				<ion-toolbar>
+			<ion-header [translucent]="true">
+				<ion-toolbar color="primary">
 					<ion-title style="text-align: center"
 						>Crear Aseguradora</ion-title
 					>
 				</ion-toolbar>
 				<ion-toolbar>
 					<ion-buttons slot="start">
-						<ion-button>Cancelar</ion-button>
+						<ion-button (click)="cancel()">Cancelar</ion-button>
 					</ion-buttons>
 					<ion-buttons slot="end">
-						<ion-button>Aceptar</ion-button>
+						<ion-button (click)="confirm()">Aceptar</ion-button>
 					</ion-buttons>
 				</ion-toolbar>
 			</ion-header>
@@ -65,16 +65,23 @@
 							<ion-input
 								label="Nombre"
 								labelPlacement="floating"
+								type="text"
+								[(ngModel)]="newInsurance.name"
 							></ion-input>
 						</ion-item>
 					</ion-card-content>
 				</ion-card>
 				<div class="image ion-padding">
 					<ion-img
-						[src]="imagePath"
+						[src]="imageWebPath"
 						style="width: 100%; height: auto"
 					></ion-img>
-					<ion-button color="primary" expand="block" fill="outline">
+					<ion-button
+						color="primary"
+						expand="block"
+						fill="outline"
+						(click)="pickImage()"
+					>
 						Subir Imagem
 						<ion-icon name="image-outline" slot="end"></ion-icon>
 					</ion-button>

@@ -9,6 +9,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InsuranceService } from '../shared/services/insurance.service';
+import { InsuraceCardComponent } from './components/insurace-card/insurace-card.component';
 
 @NgModule({
 	imports: [
@@ -21,7 +22,7 @@ import { InsuranceService } from '../shared/services/insurance.service';
 		HttpClientModule,
 		FormsModule,
 	],
-	declarations: [Tab2Page],
+	declarations: [Tab2Page, InsuraceCardComponent],
 	providers: [InsuranceService],
 })
 export class Tab2PageModule {}

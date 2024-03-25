@@ -1,7 +1,7 @@
 import { isDevMode } from '@angular/core';
 import { environment as dev } from 'src/environments/environment';
 import { environment as prod } from 'src/environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Iinsurance } from '../entities/iinsurance.entity';
@@ -14,7 +14,9 @@ import { AlertController } from '@ionic/angular';
 export class InsuranceService {
 	private endPoint: string = '';
 
-	private mostPopularSource = new BehaviorSubject<{ name: string }[]>([]);
+	private mostPopularSource = new BehaviorSubject<
+		{ name: true; logo: true }[]
+	>([]);
 	public mostPopular$ = this.mostPopularSource.asObservable();
 
 	private insuranceSource = new BehaviorSubject<Iinsurance[]>([]);
@@ -30,15 +32,16 @@ export class InsuranceService {
 
 	getMostPopular(): void {
 		this.$http
-			.get<{ name: string }[]>(`${this.endPoint}/most-popular`)
-			.subscribe((response: { name: string }[]) => {
+			.get<{ name: true; logo: true }[]>(`${this.endPoint}/most-popular`)
+			.subscribe((response: { name: true; logo: true }[]) => {
 				this.mostPopularSource.next(response);
 			});
 	}
 
-	getAll(): void {
+	getAll(searchTerm: string): void {
+		const params = new HttpParams().set('searchTerm', searchTerm);
 		this.$http
-			.get<Iinsurance[]>(this.endPoint)
+			.get<Iinsurance[]>(this.endPoint, { params: params })
 			.subscribe((data: Iinsurance[]) => {
 				this.insuranceSource.next(data);
 			});
@@ -55,5 +58,12 @@ export class InsuranceService {
 					translucent: true,
 				});
 			});
+	}
+
+	updateInsurance(model: { id: number; name: string; logo: string }) {
+		return this.$http.put<Iinsurance>(`${this.endPoint}/${model.id}`, {
+			name: model.name,
+			logo: model.logo,
+		});
 	}
 }
